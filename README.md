@@ -2,7 +2,7 @@
 
 A complete, production-ready invoice generator system built with Python that creates professional PDF invoices with multiple UI options and GST calculations.
 
-## 🚀 Features
+##  Features
 
 ✅ **Multiple Professional UIs**: 3 different web interfaces  
 ✅ **Indian Rupee Support**: Complete Rs. currency integration  
@@ -13,7 +13,7 @@ A complete, production-ready invoice generator system built with Python that cre
 ✅ **No Database Required**: Works immediately  
 ✅ **Material Purchase Focus**: Specialized for business invoicing  
 
-## 🎨 UI Options
+##  UI Options
 
 ### 1. Professional Colorful UI
 ```bash
@@ -62,7 +62,7 @@ python modern_ui_app.py         # Dark theme UI
 ### 3. Access Application
 Open browser: `http://localhost:5000`
 
-## 🖥️ Desktop & CLI Options
+##  Desktop & CLI Options
 
 ### Desktop GUI
 ```bash
@@ -89,7 +89,7 @@ python material_invoice_generator.py
 - **Indian Format**: Rs. currency, GST compliance
 - **Terms & Conditions**: Custom notes support
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 Financial-Invoice-Automation-System/
@@ -140,7 +140,7 @@ Edit `config/settings.json`:
 - Update CSS styles for colors/layout
 - Add custom branding elements
 
-## 💡 Sample Invoice Output
+##  Sample Invoice Output
 
 - **Invoice Number**: Auto-generated (INV-YYYYMMDD-XXX)
 - **Customer Details**: Complete billing information
@@ -149,7 +149,7 @@ Edit `config/settings.json`:
 - **Totals**: Subtotal, GST, Discount, Grand Total
 - **Professional Format**: Business-ready PDF
 
-## 🌟 Key Benefits
+##  Key Benefits
 
 ✅ **Immediate Use** - No database setup required  
 ✅ **Multiple UIs** - Choose your preferred interface  
@@ -160,13 +160,13 @@ Edit `config/settings.json`:
 ✅ **Real-time Calculations** - Live totals update  
 ✅ **Download Ready** - PDF generation guaranteed  
 
-## 📞 Support
+##  Support
 
 - **GitHub Issues**: Report bugs or request features
 - **Documentation**: Check included guides
 - **Customization**: Follow CUSTOMIZATION.md
 
-## 📄 License
+##  License
 
 MIT License - Free for commercial and personal use
 
