@@ -112,7 +112,7 @@ Financial-Invoice-Automation-System/
 └── output/                       # Generated PDFs
 ```
 
-## 🎯 Perfect For
+##  Perfect For
 
 - **Material Suppliers**: Construction, hardware, industrial
 - **Service Providers**: Consulting, maintenance, repairs  
