@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator - Best UI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .form-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .items-container {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+        }
+
+        .item-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            align-items: end;
+        }
+
+        .item-row input, .item-row select {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            color: #2c3e50;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .totals-card {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .totals-card h3 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .grand-total {
+            font-size: 1.4em;
+            font-weight: bold;
+            border-top: 2px solid #667eea;
+            padding-top: 15px;
+            margin-top: 15px;
+            color: #11998e;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(17, 153, 142, 0.4);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .message {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .item-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-element" style="width: 60px; height: 60px; top: 20%; right: 10%; animation-delay: 2s;"></div>
+        <div class="floating-element" style="width: 100px; height: 100px; bottom: 10%; left: 20%; animation-delay: 4s;"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-file-invoice-dollar"></i> Invoice Generator</h1>
+            <p>Create Professional Invoices with GST Calculations</p>
+        </div>
+
+        <div class="main-content">
+            <div class="form-container">
+                <form id="invoiceForm">
+                    <!-- Invoice Details -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-clipboard-list"></i>
+                            Invoice Details
+                        </h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="invoice_number">Invoice Number</label>
+                                <input type="text" id="invoice_number" name="invoice_number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="payment_days">Payment Terms</label>
+                                <select id="payment_days" name="payment_days">
+                                    <option value="0">Immediate</option>
+                                    <option value="15">15 Days</option>
+                                    <option value="30" selected>30 Days</option>
+                                    <option value="45">45 Days</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="discount_rate">Discount %</label>
+                                <input type="number" id="discount_rate" name="discount_rate" step="0.01" min="0" max="100" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Details -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-user-tie"></i>
+                            Customer Information
+                        </h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="customer_name">Customer Name *</label>
+                                <input type="text" id="customer_name" name="customer_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer_email">Email Address *</label>
+                                <input type="email" id="customer_email" name="customer_email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer_phone">Phone Number</label>
+                                <input type="tel" id="customer_phone" name="customer_phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="customer_gstin">GSTIN</label>
+                                <input type="text" id="customer_gstin" name="customer_gstin">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="customer_address">Address *</label>
+                                <textarea id="customer_address" name="customer_address" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Items Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-shopping-cart"></i>
+                            Invoice Items
+                        </h2>
+                        <div class="items-container">
+                            <div id="items-container">
+                                <div class="item-row">
+                                    <div class="form-group">
+                                        <label>Description *</label>
+                                        <input type="text" name="item_description" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Quantity *</label>
+                                        <input type="number" name="item_quantity" step="0.01" min="0.01" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Rate (Rs.) *</label>
+                                        <input type="number" name="item_rate" step="0.01" min="0.01" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>GST % *</label>
+                                        <select name="item_gst" required>
+                                            <option value="0">0%</option>
+                                            <option value="5">5%</option>
+                                            <option value="12">12%</option>
+                                            <option value="18" selected>18%</option>
+                                            <option value="28">28%</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-danger" onclick="removeItem(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="addItem()">
+                                <i class="fas fa-plus"></i> Add Item
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-sticky-note"></i>
+                            Additional Information
+                        </h2>
+                        <div class="form-group full-width">
+                            <label for="notes">Notes/Terms & Conditions</label>
+                            <textarea id="notes" name="notes" placeholder="Payment due within 30 days. Thank you for your business!"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="sidebar">
+                <!-- Totals Card -->
+                <div class="totals-card">
+                    <h3><i class="fas fa-calculator"></i> Invoice Totals</h3>
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">Rs. 0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>GST:</span>
+                        <span id="total-gst">Rs. 0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Discount:</span>
+                        <span id="discount-amount">Rs. 0.00</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Grand Total:</span>
+                        <span id="grand-total">Rs. 0.00</span>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <button type="submit" form="invoiceForm" class="generate-btn">
+                    <i class="fas fa-magic"></i> Generate Invoice
+                </button>
+
+                <!-- Loading -->
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Creating your professional invoice...</p>
+                </div>
+
+                <!-- Messages -->
+                <div class="message success" id="success-message">
+                    <strong><i class="fas fa-check-circle"></i> Success!</strong>
+                    <p>Your invoice has been generated successfully.</p>
+                    <a href="#" id="download-link" class="download-btn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+
+                <div class="message error" id="error-message">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Error!</strong>
+                    <p id="error-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate invoice number
+        document.getElementById('invoice_number').value = 'INV-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(Math.random() * 1000);
+
+        // Add item functionality
+        function addItem() {
+            const container = document.getElementById('items-container');
+            const newItem = container.children[0].cloneNode(true);
+            
+            // Clear values
+            newItem.querySelectorAll('input').forEach(input => input.value = '');
+            newItem.querySelectorAll('select').forEach(select => select.selectedIndex = 3);
+            
+            container.appendChild(newItem);
+            calculateTotals();
+        }
+
+        // Remove item functionality
+        function removeItem(button) {
+            const container = document.getElementById('items-container');
+            if (container.children.length > 1) {
+                button.closest('.item-row').remove();
+                calculateTotals();
+            }
+        }
+
+        // Calculate totals
+        function calculateTotals() {
+            let subtotal = 0;
+            let totalGst = 0;
+            
+            document.querySelectorAll('.item-row').forEach(row => {
+                const qty = parseFloat(row.querySelector('[name="item_quantity"]').value) || 0;
+                const rate = parseFloat(row.querySelector('[name="item_rate"]').value) || 0;
+                const gstRate = parseFloat(row.querySelector('[name="item_gst"]').value) || 0;
+                
+                const amount = qty * rate;
+                const gstAmount = amount * gstRate / 100;
+                
+                subtotal += amount;
+                totalGst += gstAmount;
+            });
+            
+            const discountRate = parseFloat(document.getElementById('discount_rate').value) || 0;
+            const discountAmount = subtotal * discountRate / 100;
+            const grandTotal = subtotal + totalGst - discountAmount;
+            
+            document.getElementById('subtotal').textContent = 'Rs. ' + subtotal.toFixed(2);
+            document.getElementById('total-gst').textContent = 'Rs. ' + totalGst.toFixed(2);
+            document.getElementById('discount-amount').textContent = 'Rs. ' + discountAmount.toFixed(2);
+            document.getElementById('grand-total').textContent = 'Rs. ' + grandTotal.toFixed(2);
+        }
+
+        // Add event listeners
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('[name="item_quantity"], [name="item_rate"], [name="item_gst"], #discount_rate')) {
+                calculateTotals();
+            }
+        });
+
+        // Form submission
+        document.getElementById('invoiceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const invoiceData = {
+                invoice_number: formData.get('invoice_number'),
+                payment_days: formData.get('payment_days'),
+                customer_name: formData.get('customer_name'),
+                customer_email: formData.get('customer_email'),
+                customer_phone: formData.get('customer_phone'),
+                customer_gstin: formData.get('customer_gstin'),
+                customer_address: formData.get('customer_address'),
+                discount_rate: formData.get('discount_rate'),
+                notes: formData.get('notes'),
+                items: []
+            };
+            
+            // Collect items
+            document.querySelectorAll('.item-row').forEach(row => {
+                const description = row.querySelector('[name="item_description"]').value;
+                const quantity = row.querySelector('[name="item_quantity"]').value;
+                const rate = row.querySelector('[name="item_rate"]').value;
+                const gst_rate = row.querySelector('[name="item_gst"]').value;
+                
+                if (description && quantity && rate) {
+                    invoiceData.items.push({
+                        description: description,
+                        quantity: quantity,
+                        rate: rate,
+                        gst_rate: gst_rate
+                    });
+                }
+            });
+            
+            if (invoiceData.items.length === 0) {
+                alert('Please add at least one item!');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.querySelector('.generate-btn').style.display = 'none';
+            
+            // Send to server
+            fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(invoiceData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading').style.display = 'none';
+                document.querySelector('.generate-btn').style.display = 'block';
+                
+                if (data.success) {
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('download-link').href = '/download/' + data.filename;
+                    document.getElementById('error-message').style.display = 'none';
+                } else {
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('error-text').textContent = data.error;
+                    document.getElementById('success-message').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                document.getElementById('loading').style.display = 'none';
+                document.querySelector('.generate-btn').style.display = 'block';
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('error-text').textContent = 'Network error: ' + error.message;
+            });
+        });
+
+        // Initial calculation
+        calculateTotals();
+    </script>
+</body>
+</html>
