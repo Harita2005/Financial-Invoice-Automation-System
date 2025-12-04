@@ -1,0 +1,125 @@
+{
+  "customers": [
+    {
+      "_id": "customer_1",
+      "name": "Acme Corporation",
+      "email": "billing@acme.com",
+      "address": "123 Business Ave\nNew York, NY 10001",
+      "phone": "+1 (555) 123-4567"
+    },
+    {
+      "_id": "customer_2", 
+      "name": "Tech Solutions Inc",
+      "email": "accounts@techsolutions.com",
+      "address": "456 Innovation Drive\nSan Francisco, CA 94105",
+      "phone": "+1 (555) 987-6543"
+    },
+    {
+      "_id": "customer_3",
+      "name": "Global Services LLC", 
+      "email": "finance@globalservices.com",
+      "address": "789 Commerce Street\nChicago, IL 60601",
+      "phone": "+1 (555) 456-7890"
+    }
+  ],
+  "billing_records": [
+    {
+      "_id": "billing_1",
+      "customer_id": "customer_1",
+      "invoice_number": "INV-2024-001",
+      "billing_date": "2024-01-15T00:00:00Z",
+      "issue_date": "2024-01-15T00:00:00Z", 
+      "due_date": "2024-02-14T00:00:00Z",
+      "tax_rate": 0.08,
+      "discount_rate": 0.00,
+      "notes": "Monthly service fee"
+    },
+    {
+      "_id": "billing_2",
+      "customer_id": "customer_2",
+      "invoice_number": "INV-2024-002", 
+      "billing_date": "2024-01-20T00:00:00Z",
+      "issue_date": "2024-01-20T00:00:00Z",
+      "due_date": "2024-02-19T00:00:00Z",
+      "tax_rate": 0.08,
+      "discount_rate": 0.05,
+      "notes": "Bulk discount applied"
+    },
+    {
+      "_id": "billing_3",
+      "customer_id": "customer_3",
+      "invoice_number": "INV-2024-003",
+      "billing_date": "2024-01-25T00:00:00Z", 
+      "issue_date": "2024-01-25T00:00:00Z",
+      "due_date": "2024-02-24T00:00:00Z",
+      "tax_rate": 0.08,
+      "discount_rate": 0.00,
+      "notes": "Consulting services"
+    }
+  ],
+  "billing_items": [
+    {
+      "_id": "item_1",
+      "billing_record_id": "billing_1",
+      "description": "Web Development Services",
+      "quantity": 40,
+      "unit_price": 125.00
+    },
+    {
+      "_id": "item_2", 
+      "billing_record_id": "billing_1",
+      "description": "Domain Registration",
+      "quantity": 1,
+      "unit_price": 15.99
+    },
+    {
+      "_id": "item_3",
+      "billing_record_id": "billing_1", 
+      "description": "SSL Certificate",
+      "quantity": 1,
+      "unit_price": 89.99
+    },
+    {
+      "_id": "item_4",
+      "billing_record_id": "billing_2",
+      "description": "Software License (Annual)",
+      "quantity": 5,
+      "unit_price": 299.99
+    },
+    {
+      "_id": "item_5",
+      "billing_record_id": "billing_2",
+      "description": "Technical Support", 
+      "quantity": 12,
+      "unit_price": 75.00
+    },
+    {
+      "_id": "item_6",
+      "billing_record_id": "billing_2",
+      "description": "Training Sessions",
+      "quantity": 3,
+      "unit_price": 450.00
+    },
+    {
+      "_id": "item_7",
+      "billing_record_id": "billing_3",
+      "description": "Business Consultation",
+      "quantity": 8,
+      "unit_price": 200.00
+    },
+    {
+      "_id": "item_8",
+      "billing_record_id": "billing_3", 
+      "description": "Market Analysis Report",
+      "quantity": 1,
+      "unit_price": 1500.00
+    },
+    {
+      "_id": "item_9",
+      "billing_record_id": "billing_3",
+      "description": "Strategy Planning",
+      "quantity": 4,
+      "unit_price": 350.00
+    }
+  ]
+}

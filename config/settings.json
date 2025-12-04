@@ -1,0 +1,49 @@
+{
+    "company": {
+        "name": "Your Company Name",
+        "address": "123 Business Street\nCity, State 12345",
+        "phone": "+1 (555) 123-4567",
+        "email": "billing@yourcompany.com",
+        "website": "www.yourcompany.com",
+        "logo_path": "templates/logo.png"
+    },
+    "invoice": {
+        "tax_rate": 0.18,
+        "discount_rate": 0.05,
+        "currency": "INR",
+        "currency_symbol": "Rs.",
+        "invoice_prefix": "INV",
+        "date_format": "%Y-%m-%d"
+    },
+    "database": {
+        "type": "mysql",
+        "mysql": {
+            "host": "localhost",
+            "port": 3306,
+            "database": "invoice_db",
+            "username": "root",
+            "password": "password"
+        },
+        "mongodb": {
+            "host": "localhost",
+            "port": 27017,
+            "database": "invoice_db"
+        }
+    },
+    "output": {
+        "folder": "output",
+        "filename_format": "invoice_{invoice_number}_{date}.pdf"
+    },
+    "email": {
+        "enabled": false,
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "username": "your_email@gmail.com",
+        "password": "your_app_password",
+        "from_email": "billing@yourcompany.com"
+    },
+    "logging": {
+        "level": "INFO",
+        "file": "logs/invoice_generator.log"
+    }
+}
